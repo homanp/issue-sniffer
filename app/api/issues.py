@@ -1,9 +1,10 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
-from langchain.vectorstores.pinecone import Pinecone
-from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.vectorstores.pinecone import Pinecone
+from pydantic import BaseModel
+
 from app.lib.prompts import PROMPT
 
 router = APIRouter()

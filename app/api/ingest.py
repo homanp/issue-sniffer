@@ -1,12 +1,12 @@
-import pinecone
 import uuid
 
+import pinecone
 from decouple import config
 from fastapi import APIRouter
-from pydantic import BaseModel
 from langchain.document_loaders import GitLoader
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores.pinecone import Pinecone
+from pydantic import BaseModel
 
 pinecone.init(
     api_key=config("PINECONE_API_KEY"),
