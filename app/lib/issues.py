@@ -14,11 +14,6 @@ app_id = config("GITHUB_APP_ID")
 with open(os.path.normpath(os.path.expanduser("./bot_key.pem")), "r") as cert_file:
     app_key = cert_file.read()
 
-git_integration = GithubIntegration(
-    app_id,
-    app_key,
-)
-
 
 async def predict(body: dict) -> str:
     """Webhook used by Github to POST an issue of type bug"""
@@ -35,6 +30,10 @@ async def predict(body: dict) -> str:
             is_bug = True
 
     if is_bug and issue_title and issue_action == "opened":
+        git_integration = GithubIntegration(
+            app_id,
+            app_key,
+        )
         git_connection = Github(
             login_or_token=git_integration.get_access_token(
                 git_integration.get_installation(owner, repo_name).id
