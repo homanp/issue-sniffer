@@ -5,3 +5,4 @@ __pycache__
 .certs
 repos
 .DS_Store
+bot_key.pem

@@ -14,7 +14,7 @@ from app.lib.prompts import PROMPT
 router = APIRouter()
 app_id = config("GITHUB_APP_ID")
 
-with open(os.path.normpath(os.path.expanduser(".certs/bot_key.pem")), "r") as cert_file:
+with open(os.path.normpath(os.path.expanduser("./bot_key.pem")), "r") as cert_file:
     app_key = cert_file.read()
 
 git_integration = GithubIntegration(
