@@ -4,8 +4,8 @@
 
 # Superagent Issue Sniffer Bot
 
-**An LLM-powered Agent that helps with debugging issues**
-**[Install bot](https://github.com/apps/superagent-issue-sniffer)**
+<p>**An LLM-powered Agent that helps with debugging issues**</p>
+<p>**[Install bot](https://github.com/apps/superagent-issue-sniffer)**</p>
 
 <p>
 <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/homanp/issue-sniffer" />
