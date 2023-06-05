@@ -1,17 +1,14 @@
 import os
 
 from decouple import config
-from fastapi import APIRouter
 from github import Github, GithubIntegration
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores.pinecone import Pinecone
-from pydantic import BaseModel
 
 from app.lib.prompts import PROMPT
 
-router = APIRouter()
 app_id = config("GITHUB_APP_ID")
 
 with open(os.path.normpath(os.path.expanduser("./bot_key.pem")), "r") as cert_file:
@@ -23,24 +20,17 @@ git_integration = GithubIntegration(
 )
 
 
-class Issue(BaseModel):
-    action: str
-    issue: dict
-    repository: dict
-
-
-@router.post("/issues", name=" Issues", description="Github issues code sniffer")
-async def issues(body: Issue):
+async def predict(body: dict) -> str:
     """Webhook used by Github to POST an issue of type bug"""
-    pinecone_namespace = str(body.repository["id"])
-    issue_title = body.issue["title"]
-    issue_action = body.action
-    issue_number = body.issue["number"]
-    repo_name = body.repository["name"]
-    owner = body.repository["owner"]["login"]
+    pinecone_namespace = str(body["repository"]["id"])
+    issue_title = body["issue"]["title"]
+    issue_action = body["action"]
+    issue_number = body["issue"]["number"]
+    repo_name = body["repository"]["name"]
+    owner = body["repository"]["owner"]["login"]
     is_bug = False
 
-    for label in body.issue["labels"]:
+    for label in body["issue"]["labels"]:
         if label["name"] == "bug":
             is_bug = True
 
@@ -65,7 +55,7 @@ async def issues(body: Issue):
             retriever=docsearch.as_retriever(),
             chain_type_kwargs=chain_type_kwargs,
         )
-        output = qa.run(issue_title)
+        output = await qa.arun(issue_title)
         issue.create_comment(output)
 
-    return {"success": True}
+    return {"success": True, "data": output}
