@@ -25,7 +25,7 @@ flake8 = "^6.0.0"
 pinecone-client = "^2.2.1"
 tiktoken = "^0.4.0"
 gitpython = "^3.1.31"
-pygithub = "1.57"
+pygithub = "^1.58.2"
 
 
 [build-system]
