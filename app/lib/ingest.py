@@ -1,5 +1,6 @@
-import pinecone
 import os
+
+import pinecone
 from decouple import config
 from langchain.document_loaders import GitLoader
 from langchain.embeddings.openai import OpenAIEmbeddings

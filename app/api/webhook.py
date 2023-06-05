@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Request, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, status
+
 from app.lib.ingest import ingest
 from app.lib.issues import predict
 
