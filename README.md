@@ -1,10 +1,11 @@
 <div align="center">
 
-![alt text](logo.png "Logo")
+<img src="logo.png" width="80" height="80" alt="Logo">
 
 # Superagent Issue Sniffer Bot
 
 **An LLM-powered Agent that helps with debugging issues**
+**[Install bot](https://github.com/apps/superagent-issue-sniffer)**
 
 <p>
 <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/homanp/issue-sniffer" />
